@@ -1,0 +1,50 @@
+# =====================================================================
+# 校园闲置物资管理平台 · 后端配置文件模板
+# 使用方法: 复制本文件为 application.yml, 填入你自己的密码
+# 注意: application.yml 已在 .gitignore 中排除, 不会上传到 GitHub
+# =====================================================================
+server:
+  port: 8081
+
+spring:
+  application:
+    name: idle-assets-platform
+
+  # ---------- MySQL 数据源配置 ----------
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 连接本机 3306 端口的 idle_assets 库
+    url: jdbc:mysql://localhost:3306/idle_assets?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 这里填你的MySQL密码        # <-- 改成你自己的密码, 不要提交到仓库
+
+  # ---------- Redis 配置 ----------
+  data:
+    redis:
+      host: localhost            # Redis地址
+      port: 6379                 # Redis端口
+      database: 1                # 使用1号库, 与其他项目隔离
+      timeout: 5000              # 连接超时(毫秒)
+
+  # ---------- 文件上传限制 ----------
+  servlet:
+    multipart:
+      max-file-size: 10MB        # 单个文件最大10MB(物资照片)
+      max-request-size: 20MB
+
+# ---------- MyBatis-Plus 配置 ----------
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+
+# ---------- 自定义JWT配置 ----------
+jwt:
+  # 签名密钥(生产环境务必更换并妥善保管, 长度需>=32字符)
+  secret: campus-idle-assets-platform-jwt-secret-key-2026
+  # Token有效期: 24小时(毫秒)
+  expiration: 86400000
