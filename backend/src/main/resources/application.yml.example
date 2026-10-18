@@ -48,3 +48,8 @@ jwt:
   secret: campus-idle-assets-platform-jwt-secret-key-2026
   # Token有效期: 24小时(毫秒)
   expiration: 86400000
+
+# ---------- 自定义上传目录 ----------
+app:
+  # 物资图片存放目录: 建议用绝对路径(改成你自己的项目路径), 避免从IDE启动时找不到图片
+  upload-dir: ./uploads
